@@ -1,4 +1,7 @@
 superstorm
 ==========
 
-Template Python/Tornado project
+Template for Python/Tornado projects
+
+Run:
+`python main.py --settings=settings/local.conf`
