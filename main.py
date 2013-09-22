@@ -4,29 +4,27 @@ import tornado.ioloop
 import tornado.options
 import tornado.web
 
-from tornado.options import define, options, parse_config_file
+from tornado.options import define, options
+
+from superstorm.conf import get_settings
+from superstorm.handlers import MainHandler
 
 
-define("settings", type=str, help="Path to config file",
-       callback=lambda path: parse_config_file(path, final=False))
-define("port", default=8088, help="run on the given port", type=int)
-
-
-class MainHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.write("Hello, world")
+define('settings', type=str, help='Path to config file',
+       default='settings/prod.json')
+define('port', default=80, help='Run on the given port', type=int)
 
 
 def main():
-    tornado.options.parse_config_file('settings/base.conf')
     tornado.options.parse_command_line()
 
-    application = tornado.web.Application([
-        (r"/", MainHandler),
-    ])
+    installed_handlers = (MainHandler, )
+    handlers, settings = get_settings(options.settings, installed_handlers)
+
+    application = tornado.web.Application(handlers, **settings)
     http_server = tornado.httpserver.HTTPServer(application)
-    http_server.listen(options.port)
-    logging.info('Running Tornado on 127.0.0.1:%s', options.port)
+    logging.info('Running Tornado on 127.0.0.1:%s', settings['port'])
+    http_server.listen(settings['port'])
     tornado.ioloop.IOLoop.instance().start()
 
 

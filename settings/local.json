@@ -1,0 +1,7 @@
+{
+    "site_title": "Superstorm Template",
+    "static_path": "/home/hex/projects/superstorm/static",
+    "template_path": "/home/hex/projects/superstorm/static",
+    "cookie_secret": "WDezhsXTTDOmU1GICOWsofpnMb0820kqmAlhHNNzs2E=",
+    "xsrf_cookies": true
+}
