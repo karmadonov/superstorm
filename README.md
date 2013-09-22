@@ -1,4 +1,4 @@
-superstorn
+superstorm
 ==========
 
 Template Python/Tornado project
