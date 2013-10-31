@@ -1,3 +1,7 @@
 {
-    "port": 8888
+    "port": 8888,
+    "static_path": "",
+    "template_path": "",
+    "cookie_secret": "",
+    "xsrf_cookies": true
 }

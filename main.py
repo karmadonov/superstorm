@@ -8,6 +8,7 @@ from tornado.options import define, options
 
 from superstorm.conf import get_settings
 from superstorm.handlers import MainHandler
+from apps.auth.handlers import AuthHandler, LogoutHandler
 
 
 define('settings', type=str, help='Path to config file',
@@ -18,7 +19,7 @@ define('port', default=80, help='Run on the given port', type=int)
 def main():
     tornado.options.parse_command_line()
 
-    installed_handlers = (MainHandler, )
+    installed_handlers = (MainHandler, AuthHandler, LogoutHandler, )
     handlers, settings = get_settings(options.settings, installed_handlers)
 
     application = tornado.web.Application(handlers, **settings)
