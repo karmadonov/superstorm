@@ -16,4 +16,5 @@ class MainHandler(BaseHandler):
     url = r'/'
 
     def get(self):
-        self.render('base.html')
+        context = {'is_auth': False}
+        self.render('base.html', **context)
